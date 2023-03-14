@@ -8,7 +8,7 @@ score_df = pd.read_csv("Merge.csv")
 movie_df = pd.read_csv("ConsolidadoGeneral.csv")
 
 app = FastAPI(title='Consultas Plataformas de Streaming',
-            description='Start-up que provee servicios de agregación de plataformas de streaming.',
+            description='Start-up que provee servicios de agregación de plataformas de streaming. By Camilo Santamaría',
             version='1.0.0')
 
 ##Película con mayor duración con filtros opcionales de AÑO, PLATAFORMA Y TIPO DE DURACIÓN.
@@ -50,20 +50,17 @@ def get_count_platform(platform):
 
 ##Actor que más se repite según plataforma y año. (La función debe llamarse get_actor(platform, year))
 @app.get("/get_actor/")
-def get_actor(platform: str, year: int):
-    # Filtrar el DataFrame para seleccionar solo las filas que corresponden a la plataforma y el año especificados
-    filtered_df = movie_df[(movie_df['platform'] == platform) & (movie_df['release_year'] == year)]
-    
-    # Eliminar las filas que contienen valores nulos en la columna 'actor'
-    filtered_df = filtered_df.dropna(subset=['cast'])
-    
-    # Contar cuántas veces aparece cada actor en la columna 'actor'
-    actor_counts = filtered_df['cast'].value_counts()
-    
-    # Verificar si la serie actor_counts está vacía
-    if actor_counts.empty:
-        return {"mensaje": f"No se encontraron actores para la plataforma {platform} en el año {year}"}
-    
-    # Obtener el índice del valor máximo en la serie actor_counts
-    max_actor = actor_counts.idxmax()
-    return {"Actor/s": max_actor}
+async def count_actors(platform: str, year: int):
+    # Filtrar el DataFrame por plataforma y año
+    df_filtered = movie_df.loc[(movie_df['platform'] == platform) & (movie_df['release_year'] == year)]
+
+    # Dividir la columna de actores en filas
+    df_actors = df_filtered['cast'].str.split(',', expand=True).stack().reset_index(level=0).rename(columns={0:'cast'})
+
+    # Contar la frecuencia de cada actor
+    actor_counts = df_actors['cast'].value_counts().reset_index(name='count').rename(columns={'index':'cast'})
+
+    # Encontrar el actor más común
+    actor_max_count = actor_counts.iloc[0]['cast']
+
+    return {'platform': platform, 'year': year, 'actor': actor_max_count}
