@@ -217,3 +217,5 @@ async def count_actors(platform: str, year: int):
 Puedes visualizar la API desarrollada con el siguiente enlace:
 
 + [Deployment](https://proyecto-deploy.onrender.com/docs#/) 👈
+
+<br>🚀 Quick start MVP Machine Learning</br>
