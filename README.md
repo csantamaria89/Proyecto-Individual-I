@@ -214,6 +214,6 @@ async def count_actors(platform: str, year: int):
 
     return {'platform': platform, 'year': year, 'actor': actor_max_count}
 ```
-Puedesutilizar la API desarrollada con el siguiente enlace:
+Puedes visualizar la API desarrollada con el siguiente enlace:
 
 + [Deployment](https://proyecto-deploy.onrender.com/docs#/) 👈
