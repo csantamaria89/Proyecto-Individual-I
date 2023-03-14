@@ -64,3 +64,69 @@ df_amazon['rating'] = df_amazon['rating'].fillna("G")
 #Utilizamos la función Fillna para que en todos aquellos valores nulos se reeplazara por el caracter en especifico. 
 #En este caso "G" en la columna 'rating'
 ```
+
++ De haber fechas, deberán tener el formato **`AAAA-mm-dd`**
+```shell
+df_amazon['date_added'] = pd.to_datetime(df_amazon['date_added'])
+df_amazon['date_added'] = df_amazon['date_added'].dt.strftime('%Y-%m-%d')
+```
+Estas dos líneas de código convierten la columna 'date_added' de un dataframe llamado 'df_amazon' a un formato de fecha y luego lo convierten en una cadena de texto con el formato solicitado 'YYYY-MM-DD'.
+
++ Los campos de texto deberán estar en **minúsculas**, sin excepciones
+```shell
+# Aplicamos la función str.lower() a todos los valores del DataFrame utilizando el método applymap()
+df_amazon = df_amazon.applymap(lambda x: x.lower() if type(x) == str else x)
+df_amazon.head()
+```
+
++ El campo ***duration*** debe convertirse en dos campos: **`duration_int`** y **`duration_type`**. El primero será un integer y el segundo un string indicando la unidad de medición de duración: min (minutos) o season (temporadas)
+
+```shell
+# Utilizamos str.extract() para separar la cantidad de tiempo y la unidad de tiempo en dos columnas diferentes
+df_amazon[['duration_int', 'duration_type']] = df_amazon['duration'].str.extract('(\d+) (\w+)')
+df_amazon['duration_int'] = pd.to_numeric(df_amazon['duration_int'])
+df_amazon.head()
+```
+
+El siguiente procedimiento se aplico a cada una de las plataformas de Streaming. En la siguiente sentencia se puede evidenciar el código resumido para esta caso la plataforma de DisneyPlus:
+```shell
+add_char = lambda x: 'd' + x
+
+df_disney['show_id'] = df_disney['show_id'].apply(add_char)
+
+
+df_disney['rating'] = df_disney['rating'].fillna("G")
+
+df_disney['date_added'] = pd.to_datetime(df_disney['date_added'])
+df_disney['date_added'] = df_disney['date_added'].dt.strftime('%Y-%m-%d')
+
+
+df_disney = df_disney.applymap(lambda x: x.lower() if type(x) == str else x)
+
+df_disney[['duration_int', 'duration_type']] = df_disney['duration'].str.extract('(\d+) (\w+)')
+df_disney['duration_int'] = pd.to_numeric(df_disney['duration_int'])
+```
+
+Al final se evidenció que cada Dataset contenía las mismas variables por lo que se procedió a integrar todas las plataformas en un solo **`df`** y se creo una nueva columna denominada "plataforma" para indicar de acuerdo con la inicial del Id, a que plataforma correspondía:
+```shell
+# Unir los dos DataFrames
+df_general = pd.concat([df_amazon, df_hulu, df_disney, df_netflix])
+
+#Generar nueva columna que me in dica la plataforma
+
+def set_platform(row):
+    if row.startswith("a"):
+        return "amazon"
+    elif row.startswith("n"):
+        return "netflix"
+    elif row.startswith("h"):
+        return "hulu"
+    elif row.startswith("d"):
+        return "disney"
+    else:
+        return "Otro"
+
+# Crear una nueva columna "platform" basada en la columna "Id"
+df_general["platform"] = df_general["show_id"].apply(set_platform)
+df_general = df_general.rename(columns={"show_id": "movieId"}
+```
