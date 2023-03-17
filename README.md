@@ -216,11 +216,11 @@ async def count_actors(platform: str, year: int):
 ```
 Puedes visualizar la API desarrollada con el siguiente enlace:
 
-+ [Deployment](https://proyecto-deploy.onrender.com/docs#/) 👈
++ [Deployment FastAPI](https://proyecto-deploy.onrender.com/docs#/) 👈
 
 <br>👉Para ver el paso a paso de la implementación, entrenamiento y testeo del modelo de **MachinLearning** ver el archivo:  [ModeloML](https://github.com/csantamaria89/Proyecto-Individual-I/blob/main/ModeloML.ipynb)
 
 Puedes visualizar la API desarrollada con el siguiente enlace:
 
-+ [Deployment](https://3890edbcb7d37fb718.gradio.live) 👈
++ [ModeloML](https://3890edbcb7d37fb718.gradio.live) 👈
 
