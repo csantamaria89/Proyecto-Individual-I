@@ -222,5 +222,5 @@ Puedes visualizar la API desarrollada con el siguiente enlace:
 
 Puedes visualizar la API desarrollada con el siguiente enlace:
 
-+ [ModeloML](https://3890edbcb7d37fb718.gradio.live) 👈
++ [ModeloML](https://c63030c4a4857f361d.gradio.live) 👈
 
