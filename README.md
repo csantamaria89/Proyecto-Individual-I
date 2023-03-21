@@ -224,3 +224,7 @@ Puedes visualizar la API desarrollada con el siguiente enlace:
 
 + [ModeloML](https://huggingface.co/spaces/csanta89/ProyectoHenry) 👈
 
+- Video explicativo:
+
++ [YouTube](https://www.youtube.com/watch?v=ao57TtVFkgI) 👈
+
