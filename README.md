@@ -214,7 +214,7 @@ async def count_actors(platform: str, year: int):
 
     return {'platform': platform, 'year': year, 'actor': actor_max_count}
 ```
-Puedes visualizar la API desarrollada con el siguiente enlace:
+🚨Puedes visualizar la API desarrollada con el siguiente enlace:
 
 + [Deployment FastAPI](https://proyecto-deploy.onrender.com/docs#/) 👈
 
@@ -224,7 +224,7 @@ Puedes visualizar la API desarrollada con el siguiente enlace:
 
 + [ModeloML](https://huggingface.co/spaces/csanta89/ProyectoHenry) 👈
 
-- Video explicativo:
+🚨Video explicativo:
 
 + [YouTube](https://www.youtube.com/watch?v=ao57TtVFkgI) 👈
 
