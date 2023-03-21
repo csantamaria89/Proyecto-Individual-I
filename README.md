@@ -222,5 +222,5 @@ Puedes visualizar la API desarrollada con el siguiente enlace:
 
 Puedes visualizar la API desarrollada con el siguiente enlace:
 
-+ [ModeloML](https://c63030c4a4857f361d.gradio.live) 👈
++ [ModeloML](https://huggingface.co/spaces/csanta89/ProyectoHenry) 👈
 
